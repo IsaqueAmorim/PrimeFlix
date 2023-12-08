@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PrimeFlix.Catalog.Application\PrimeFlix.Catalog.Application.csproj" />
+    <ProjectReference Include="..\PrimeFlix.Catalog.Domain\PrimeFlix.Catalog.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
