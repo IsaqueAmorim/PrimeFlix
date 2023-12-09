@@ -1,4 +1,5 @@
-﻿using PrimeFlix.Catalog.Domain.Exceptions;
+﻿
+using PrimeFlix.Catalog.Domain.Exceptions;
 
 namespace PrimeFlix.Catalog.Domain.Entity
 {
@@ -24,9 +25,15 @@ namespace PrimeFlix.Catalog.Domain.Entity
         public void Validate()
         {
             if (string.IsNullOrWhiteSpace(Name))
-                throw new EntityValidationException($"{nameof(Name)} should not be empty or null");
+                throw new EntityValidationException(ExceptionMessage.CATEGORY_NAME_NULL_OR_EMPTY);
+            if(Name.Length < 3)
+                throw new EntityValidationException(ExceptionMessage.CATEGORY_NAME_LESS_3_CHARS);
+            if(Name.Length > 255)
+                throw new EntityValidationException(ExceptionMessage.CATEGORY_NAME_MORE_255_CHARS);
             if (Description is null) 
-                throw new EntityValidationException($"{nameof(Description)} should not be empty or null");
+                throw new EntityValidationException(ExceptionMessage.CATEGORY_DESCRIPTION_NULL);
+            if (Description.Length > 10_000)
+                throw new EntityValidationException(ExceptionMessage.CATEGORY_DESCRIPTION_MORE_10_000_CHARS);
         }
     }
 }
