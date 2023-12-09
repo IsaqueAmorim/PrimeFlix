@@ -1,5 +1,4 @@
-﻿
-using PrimeFlix.Catalog.Domain.Exceptions;
+﻿using PrimeFlix.Catalog.Domain.Exceptions;
 
 namespace PrimeFlix.Catalog.Domain.Entity
 {
@@ -34,6 +33,25 @@ namespace PrimeFlix.Catalog.Domain.Entity
                 throw new EntityValidationException(ExceptionMessage.CATEGORY_DESCRIPTION_NULL);
             if (Description.Length > 10_000)
                 throw new EntityValidationException(ExceptionMessage.CATEGORY_DESCRIPTION_MORE_10_000_CHARS);
+        }
+
+        public void Activate()
+        {
+            IsActive = true;
+            Validate();
+        }
+
+        public void Deactivate()
+        {
+            IsActive = false;
+            Validate();
+        }
+
+        public void Update(string name, string description = null)
+        {
+            Name = name;
+            Description = description ?? Description;
+            Validate();
         }
     }
 }
